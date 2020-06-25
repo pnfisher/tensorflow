@@ -33,8 +33,8 @@ HOST_ARCH := $(shell if uname -m | grep -Eq 'i[345678]86'; then echo x86_32; els
 
 # Override these on the make command line to target a specific architecture. For example:
 # make -f tensorflow/lite/Makefile TARGET=rpi TARGET_ARCH=armv7l
-TARGET := $(HOST_OS)
-TARGET_ARCH := $(HOST_ARCH)
+TARGET := $(TARGET_HOST_OS)
+TARGET_ARCH := $(TARGET_HOST_ARCH)
 
 # Default compiler and tool names:
 CXX_TOOL := g++
@@ -75,15 +75,11 @@ TEST_SCRIPT := tensorflow/lite/micro/testing/test_linux_binary.sh
 MICROLITE_LIBS := -lm
 
 # TODO(b/150240249): Add in -fno-rtti once that works for the Xtensa toolchain.
-# TODO(b/159155203): Consider TF_LITE_STATIC_MEMORY to align more with the fact
-# this flag is for an optimized micro runtime.
-CXXFLAGS := -std=c++11 -DTF_LITE_STATIC_MEMORY
+CXXFLAGS := -std=c++11 -DTF_LITE_STATIC_MEMORY -DTF_LITE_USE_GLOBAL_ROUND
 CCFLAGS  := -std=c11   -DTF_LITE_STATIC_MEMORY
 ARFLAGS := -r
-
-# override these in the makefile.inc for specific compiler targets
-TARGET_TOOLCHAIN_PREFIX :=
-TARGET_TOOLCHAIN_ROOT :=
+TARGET_TOOLCHAIN_PREFIX := $(TOOLCHAIN_PREFIX)
+CC_PREFIX := $(PATH_TOOLCHAIN)/
 
 ifeq ($(BUILD_TYPE), debug)
 	CXXFLAGS += -DDEBUG -g
