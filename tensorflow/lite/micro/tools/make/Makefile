@@ -33,13 +33,13 @@ HOST_ARCH := $(shell if uname -m | grep -Eq 'i[345678]86'; then echo x86_32; els
 
 # Override these on the make command line to target a specific architecture. For example:
 # make -f tensorflow/lite/Makefile TARGET=rpi TARGET_ARCH=armv7l
-TARGET := $(HOST_OS)
-TARGET_ARCH := $(HOST_ARCH)
+TARGET := linux
+TARGET_ARCH := mtk8167
 
 # Default compiler and tool names:
-CXX_TOOL := g++
-CC_TOOL := gcc
-AR_TOOL := ar
+CXX_TOOL ?= $(CXX)
+CC_TOOL ?= $(CC)
+AR_TOOL ?= $(AR)
 
 # Specify TAGS on the command line to add a particular set of specialized
 # implementations, for example TAGS="CMSIS disco_f746ng" to target a Discovery
