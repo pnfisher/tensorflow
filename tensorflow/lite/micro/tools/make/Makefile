@@ -1,5 +1,5 @@
-ifneq (3.82,$(firstword $(sort $(MAKE_VERSION) 3.82)))
-  $(error "Requires make version 3.82 or later (current is $(MAKE_VERSION))")
+ifneq (3.81,$(firstword $(sort $(MAKE_VERSION) 3.81)))
+  $(error "Requires make version 3.81 or later (current is $(MAKE_VERSION))")
 endif
 
 # root directory of tensorflow
