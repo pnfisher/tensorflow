@@ -24,6 +24,8 @@
 
 set -e
 
+export PATH="${PATH}:/usr/bin"
+
 # Patches the Ambiq Micro SDK to work around build issues.
 patch_am_sdk() {
   local am_dir="${1}"
