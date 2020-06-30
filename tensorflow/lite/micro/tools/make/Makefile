@@ -1,5 +1,5 @@
-ifneq (3.82,$(firstword $(sort $(MAKE_VERSION) 3.82)))
-  $(error "Requires make version 3.82 or later (current is $(MAKE_VERSION))")
+ifneq (3.81,$(firstword $(sort $(MAKE_VERSION) 3.81)))
+  $(error "Requires make version 3.81 or later (current is $(MAKE_VERSION))")
 endif
 
 MAKEFILE_DIR := tensorflow/lite/micro/tools/make
@@ -26,13 +26,13 @@ HOST_ARCH := $(shell if uname -m | grep -Eq 'i[345678]86'; then echo x86_32; els
 
 # Override these on the make command line to target a specific architecture. For example:
 # make -f tensorflow/lite/Makefile TARGET=rpi TARGET_ARCH=armv7l
-TARGET := $(HOST_OS)
-TARGET_ARCH := $(HOST_ARCH)
+TARGET := linux
+TARGET_ARCH := mtk8183
 
 # Default compiler and tool names:
-CXX_TOOL := g++
-CC_TOOL := gcc
-AR_TOOL := ar
+CXX_TOOL ?= $(CXX)
+CC_TOOL ?= $(CC)
+AR_TOOL ?= $(AR)
 
 # Specify TAGS on the command line to add a particular set of specialized
 # implementations, for example TAGS="CMSIS disco_f746ng" to target a Discovery
