@@ -401,12 +401,14 @@ TfLiteStatus FlatBufferVectorToTfLiteTypeArray(
     kTfLiteArrayType** result) {
   TFLITE_DCHECK(error_reporter != nullptr);
   TFLITE_DCHECK(flatbuffer_array != nullptr);
+#if 0
   // Only two conversions are supported - float and int32 - ensure that these
   // match at compile time instead of duplicating functions here:
   static_assert((std::is_same<kFlatBufferVectorType, int32_t>() &&
                  std::is_same<kTfLiteArrayType, TfLiteIntArray>()) ||
                 (std::is_same<kFlatBufferVectorType, float>() &&
                  std::is_same<kTfLiteArrayType, TfLiteFloatArray>()));
+#endif
   if (FLATBUFFERS_LITTLEENDIAN) {
     // On little-endian machines, TfLite*Array happens to have the same memory
     // layout as flatbuffers:Vector<kFlatBufferVectorType>, so we can
